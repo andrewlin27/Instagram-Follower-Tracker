@@ -1,11 +1,11 @@
 # Instagram-Follower-Tracker
 #### Must be done on a desktop ####
 This program takes in your personal instagram data and sorts them into 5 unique lists:
-* followers
-* following
-* users who you don't follow back
-* users who don't follow you back
-* users who still haven't accepted your follow request
+* Followers
+* Following
+* Users who you don't follow back
+* Users who don't follow you back
+* Users who still haven't accepted your follow request
 
 Here's how to use it:
 
