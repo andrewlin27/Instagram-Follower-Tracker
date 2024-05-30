@@ -14,8 +14,8 @@ Here's how to use it:
     1. Scroll down to `Your information and permissions` and click `Download your information`.
     1. Click `Download or transfer information` and select the instagram account you are wanting to use. 
     1. Select `Some of your information` and only choose `Followers and following`. 
-    1. Select `Download to device` and choose 'JSON' as your format and click `Create files`. 
-    1. You'll be sent an email titled **Your Instagram Information** (takes around 5 minutes).
+    1. Select `Download to device` and choose 'All time' as your Date range and 'JSON' as your format and click `Create files`. 
+    1. You'll be sent an email titled **Your Instagram Information** (takes a few minutes).
     1. Click `Download information`.
 2. Open the zip file and find the folder titled `followers_and_following`. Find these 3 files in the folder: `followers.json` `following.json` and `pending_follow_requests.json`.
 3. Create a new folder somewhere on your computer (ex. on your `C Drive`) and copy those 3 files into this new folder.
