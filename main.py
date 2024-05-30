@@ -1,5 +1,6 @@
 import json
-with open('followers.json') as file:
+
+with open('followers_1.json') as file:
     followers_json = json.load(file)
 
 with open('following.json') as file:
@@ -9,56 +10,45 @@ with open('pending_follow_requests.json') as file:
     pending = json.load(file)
 
 
-#list of followers
-follower_list = []
-for follower in followers_json["relationships_followers"]:
-    follower_list.append(follower["string_list_data"][0]["value"])
+follower_set = set()
+for follower in followers_json:
+    follower_set.add(follower["string_list_data"][0]["value"])
 
-#list of following
-following_list = []
+
+following_set = set()
 for following in following_json["relationships_following"]:
-    following_list.append(following["string_list_data"][0]["value"])
+    following_set.add(following["string_list_data"][0]["value"])
 
-#followers who i dont follow back (follower but not following)
-i_dont_follow = []
-for follower in follower_list:
-    if not follower in following_list:
-        i_dont_follow.append(follower)
+# follower but not following
+i_dont_follow = follower_set.difference(following_set)
 
-#following who don't follow back (following but now follower)
-not_follow_back = []
-for following in following_list:
-    if not following in follower_list:
-        not_follow_back.append(following)
+# following but now follower
+not_follow_back = following_set.difference(follower_set)
 
-#pending follow request
 pending_list = []
 for account in pending["relationships_follow_requests_sent"]:
     pending_list.append(account["string_list_data"][0]["value"])
 
-#function to print a list
+
 def print_list(l):
     print("")
-    for i in l:
-        print(i)
+    for item in l:
+        print(item)
     print("")
-    return
 
 
-lists = {"1" : follower_list, "2" : following_list, "3" : i_dont_follow, "4" : not_follow_back, "5" : pending_list}
+lists = {"1" : follower_set, "2" : following_set, "3" : i_dont_follow, "4" : not_follow_back, "5" : pending_list}
+
 while True:
-    print("\n1: list of followers (%s)"%(len(follower_list)))
-    print("2: list of following (%s)"%(len(following_list)))
-    print("3: followers who i don't follow back (%s)"%(len(i_dont_follow)))
-    print("4: following who don't follow back (%s)"%(len(not_follow_back)))
-    print("5: still haven't accepted my follow request (%s)\n"%(len(pending_list)))
+    print(f"\n1: list of followers ({len(follower_set)})")
+    print(f"2: list of following ({len(following_set)})")
+    print(f"3: followers who i don't follow back ({len(i_dont_follow)})")
+    print(f"4: following who don't follow back ({len(not_follow_back)})")
+    print(f"5: still haven't accepted my follow request ({len(pending_list)})\n")
 
-    value = str(input("pick a list: "))
-    #convert str to ascii value and check if in range 1-5
-    if not ord(value) in range(49,54):
+    val = input("pick a list (type q to quit): ")
+    
+    if val == 'q':
         break
-    print_list(lists[value])
 
-    go = str(input("continue(y/n)? "))
-    if go != "y":
-        break
+    print_list(lists[val])
